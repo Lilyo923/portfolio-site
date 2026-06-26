@@ -91,7 +91,7 @@ ul  { list-style: none; }
 /* IMAGINe Studio — barcode horizontal (logo ≈ centre de l'image carrée) */
 .logo-clip--imagine {
   width: 186px;
-  height: 48px;
+  height: 24px;
 }
 .logo-clip--imagine img {
   position: absolute;
@@ -104,7 +104,7 @@ ul  { list-style: none; }
 /* HwR Engine — logo centré dans carré arrondi */
 .logo-clip--hwr {
   width: 48px;
-  height: 48px;
+  height: 24px;
 }
 .logo-clip--hwr img {
   position: absolute;
