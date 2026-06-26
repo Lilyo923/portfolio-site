@@ -114,27 +114,63 @@ ul  { list-style: none; }
   display: block;
 }
 
-/* Variante agrandie pour la section Studios */
-.logo-clip--imagine-lg {
-  width: 232px;
-  height: 60px;
+/* ──────────────────────────────────────────────────────────
+   Variante section Studios (plus petite que le header)
+   ──────────────────────────────────────────────────────────
+   COMMENT AJUSTER LA TAILLE :
+
+   Le système fonctionne en 3 étapes :
+     1. Le conteneur (.logo-clip--X) = la "fenêtre" visible
+        → width + height définissent la zone affichée
+        → overflow: hidden coupe tout le reste
+     2. img à l'intérieur est agrandie (width: Npx)
+        → plus img est large = logo plus grand dans la fenêtre
+     3. top / left décalent l'image pour centrer le logo
+
+   RECETTE POUR CHANGER LA HAUTEUR :
+
+   ▸ IMAGINe Studio :
+       img width  = hauteur_voulue / 0.12
+       top        = img_width * (-0.44)
+       left       = img_width * (-0.268)
+       cont.width = img_width * 0.53
+       Ex. 40px → img:333px  top:-147px  left:-89px  cont:177px x 40px
+       Ex. 34px → img:283px  top:-125px  left:-76px  cont:150px x 34px  ← actuel
+       Ex. 28px → img:233px  top:-103px  left:-62px  cont:124px x 28px
+
+   ▸ HwR Engine :
+       img width  = hauteur_voulue / 0.185
+       top        = img_width * (-0.403)
+       left       = img_width * (-0.407)
+       Conteneur  = carré de la hauteur voulue
+       Ex. 40px → img:216px  top:-87px   left:-88px  cont:40px x 40px
+       Ex. 34px → img:184px  top:-74px   left:-75px  cont:34px x 34px  ← actuel
+       Ex. 28px → img:151px  top:-61px   left:-61px  cont:28px x 28px
+   ────────────────────────────────────────────────────────── */
+
+/* Studios — IMAGINe (hauteur 34px) */
+.logo-clip--imagine-studio {
+  width: 150px;
+  height: 34px;
 }
-.logo-clip--imagine-lg img {
+.logo-clip--imagine-studio img {
   position: absolute;
-  width: 500px;
-  top: -220px;
-  left: -134px;
+  width: 283px;
+  top: -125px;
+  left: -76px;
   display: block;
 }
-.logo-clip--hwr-lg {
-  width: 60px;
-  height: 60px;
+
+/* Studios — HwR Engine (hauteur 34px) */
+.logo-clip--hwr-studio {
+  width: 34px;
+  height: 34px;
 }
-.logo-clip--hwr-lg img {
+.logo-clip--hwr-studio img {
   position: absolute;
-  width: 322px;
-  top: -130px;
-  left: -131px;
+  width: 184px;
+  top: -74px;
+  left: -75px;
   display: block;
 }
 
