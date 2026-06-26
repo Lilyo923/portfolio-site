@@ -6,18 +6,18 @@ const PROJECTS = {
     title:       'Brad Bitt — Le Site',
     studio:      'imagine',
     studioLabel: 'IMAGINe Studio',
-    favicon:     'https://bbittmaislesite.netlify.app/favicon.ico',
-    fallback:    'BB',
+    image:       '/images/brad.png',
+    iconClass:   'm-icon--white',
     type:        'Site créatif',
     url:         'https://bbittmaislesite.netlify.app',
-    desc:        "Le site officiel de Brad Bitt. Retrouvez l'intégralité de l'univers, les personnages, les lore et tous les détails de ce projet créatif développé sur le long terme."
+    desc:        "Le site officiel de Brad Bitt. Retrouvez l'intégralité de l'univers, les personnages, le lore et tous les détails de ce projet créatif développé sur le long terme."
   },
   fnaf: {
     title:       'Three Nights at Chez Moi — IRL',
     studio:      'hwr',
     studioLabel: 'HwR Engine',
-    favicon:     'https://fnaf3irl-102.netlify.app/favicon.ico',
-    fallback:    '3N',
+    image:       '/images/3IRL.png',
+    iconClass:   '',
     type:        'Jeu web',
     url:         'https://fnaf3irl-102.netlify.app',
     desc:        "Un jeu d'horreur web inspiré de Five Nights at Freddy's. Survivez trois nuits à Chez Moi aux côtés de Brad Bitt, Frank Lebœuf et Mama Coco. Achievements, Jukebox, mini-jeu SYSTÈME-01 et Custom Night."
@@ -26,11 +26,11 @@ const PROJECTS = {
     title:       'AmiiToon Tracker',
     studio:      'hwr',
     studioLabel: 'HwR Engine',
-    favicon:     'https://amiitoon-tracker.netlify.app/favicon.ico',
-    fallback:    'AT',
+    image:       '/images/amiitoon.png',
+    iconClass:   '',
     type:        'Outil / App',
     url:         'https://amiitoon-tracker.netlify.app',
-    desc:        "Un tracker web pour recenser et visualiser votre collection d'amiibo de la saga Splatoon. Interface épurée, mode clair/sombre, données à jour, support PWA — 27 figurines référencées."
+    desc:        "Un tracker web pour recenser et visualiser votre collection d'amiibo de la saga Splatoon. Interface épurée, mode clair/sombre, support PWA — 27 figurines référencées."
   }
 };
 
@@ -53,21 +53,15 @@ function openModal(id) {
   const tagClass = p.studio === 'imagine' ? 'imagine-tag' : 'hwr-tag';
 
   modalContent.innerHTML = `
-    <div class="m-icon">
-      <img
-        src="${p.favicon}"
-        alt=""
-        aria-hidden="true"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-      />
-      <span class="m-icon-fb" style="display:none">${p.fallback}</span>
+    <div class="m-icon ${p.iconClass}">
+      <img src="${p.image}" alt="" aria-hidden="true" />
     </div>
     <span class="card-tag ${tagClass}">${p.studioLabel}</span>
     <h2 class="m-title" id="modalTitle">${p.title}</h2>
     <p class="m-desc">${p.desc}</p>
     <span class="m-type">${p.type}</span>
     <a href="${p.url}" target="_blank" rel="noopener noreferrer" class="m-cta">
-      Visiter le site&nbsp;↗
+      Lancer le projet&nbsp;↗
     </a>
   `;
 
@@ -82,7 +76,7 @@ function closeModal() {
   if (lastFocused) lastFocused.focus();
 }
 
-/* Clics sur les cartes */
+/* Clics sur les cartes (hors lien direct ↗) */
 document.querySelectorAll('.project-card').forEach(card => {
   card.addEventListener('click', () => openModal(card.dataset.id));
   card.addEventListener('keydown', e => {
@@ -103,9 +97,7 @@ overlay.addEventListener('click', e => {
 
 /* Touche Échap */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && overlay.classList.contains('open')) {
-    closeModal();
-  }
+  if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
 });
 
 
@@ -123,7 +115,7 @@ if (!prefersReducedMotion) {
         const el = entry.target;
         el.classList.add('revealed');
 
-        /* Après l'animation, supprime le délai pour que le hover soit réactif */
+        /* Après l'animation, reset le délai pour des hovers réactifs */
         el.addEventListener('transitionend', () => {
           el.style.transitionDelay = '0ms';
         }, { once: true });
@@ -131,12 +123,11 @@ if (!prefersReducedMotion) {
         observer.unobserve(el);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
 
   revealTargets.forEach(el => observer.observe(el));
 
 } else {
-  /* Mouvement réduit : révèle immédiatement */
   document.querySelectorAll('.project-card, .studio-card').forEach(el => {
     el.classList.add('revealed');
   });
