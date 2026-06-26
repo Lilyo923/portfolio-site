@@ -80,16 +80,62 @@ ul  { list-style: none; }
 }
 .logo-wrap:hover { opacity: 0.7; }
 
-/* Images logo — fond #EBEBEB des PNG = même que --bg, invisible */
-.logo-img {
-  height: 40px;
-  width: auto;
+/* ── Logo clip : crop le padding blanc/gris autour du logo dans les PNG ── */
+/* L'image est agrandie et repositionnée dans un conteneur overflow:hidden  */
+.logo-clip {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* IMAGINe Studio — barcode horizontal (logo ≈ centre de l'image carrée) */
+.logo-clip--imagine {
+  width: 186px;
+  height: 48px;
+}
+.logo-clip--imagine img {
+  position: absolute;
+  width: 400px;
+  top: -176px;
+  left: -107px;
   display: block;
 }
-.logo-img--sq {
-  height: 40px;
-  width: 40px;
-  object-fit: contain;
+
+/* HwR Engine — logo centré dans carré arrondi */
+.logo-clip--hwr {
+  width: 48px;
+  height: 48px;
+}
+.logo-clip--hwr img {
+  position: absolute;
+  width: 258px;
+  top: -104px;
+  left: -105px;
+  display: block;
+}
+
+/* Variante agrandie pour la section Studios */
+.logo-clip--imagine-lg {
+  width: 232px;
+  height: 60px;
+}
+.logo-clip--imagine-lg img {
+  position: absolute;
+  width: 500px;
+  top: -220px;
+  left: -134px;
+  display: block;
+}
+.logo-clip--hwr-lg {
+  width: 60px;
+  height: 60px;
+}
+.logo-clip--hwr-lg img {
+  position: absolute;
+  width: 322px;
+  top: -130px;
+  left: -131px;
+  display: block;
 }
 
 .sep-x {
@@ -403,22 +449,10 @@ ul  { list-style: none; }
 .studios-grid .studio-card:nth-child(1) { --stagger: 0ms;  }
 .studios-grid .studio-card:nth-child(2) { --stagger: 90ms; }
 
-/* Zone logo — fond gris transparent sur fond gris = intégration */
+/* Zone logo studio */
 .studio-logo-wrap {
   display: flex;
   align-items: flex-start;
-}
-
-.studio-logo-img {
-  height: 52px;
-  width: auto;
-  display: block;
-}
-
-.studio-logo-img--sq {
-  height: 52px;
-  width: 52px;
-  object-fit: contain;
 }
 
 .studio-desc {
